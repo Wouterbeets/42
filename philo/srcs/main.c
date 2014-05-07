@@ -2,21 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define NUM_THREADS	4
+#include "philo.h"
 
-void *BusyWork(void *t)
+void		philo(void *data)
 {
    int i;
-   long tid;
-   double result=0.0;
-   tid = (long)t;
-   printf("Thread %ld starting...\n",tid);
-   for (i=0; i<1000000; i++)
-   {
-      result = result + sin(i) * tan(i);
-   }
-   printf("Thread %ld done. Result = %e\n",tid, result);
-   pthread_exit((void*) t);
+   pthread_exit((void*) i);
 }
 
 int main ()
@@ -24,16 +15,17 @@ int main ()
    pthread_t thread[NUM_THREADS];
    pthread_attr_t attr;
    int rc;
-   long t;
+   long i;
    void *status;
+   t_philo	ph[NUM_THREADS];
 
    /* Initialize and set thread detached attribute */
    pthread_attr_init(&attr);
    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 
-   for(t=0; t<NUM_THREADS; t++) {
-      printf("Main: creating thread %ld\n", t);
-      rc = pthread_create(&thread[t], &attr, BusyWork, (void *)t); 
+   for(i=0; i<NUM_THREADS; i++) {
+      printf("Main: creating thread %ld\n", i);
+      rc = pthread_create(&thread[i], &attr, philo, (void *)i); 
       if (rc) {
          printf("ERROR; return code from pthread_create() is %d\n", rc);
          exit(-1);
@@ -42,13 +34,13 @@ int main ()
 
    /* Free attribute and wait for the other threads */
    pthread_attr_destroy(&attr);
-   for(t=0; t<NUM_THREADS; t++) {
-      rc = pthread_join(thread[t], &status);
+   for(i=0; i<NUM_THREADS; i++) {
+      rc = pthread_join(thread[i], &status);
       if (rc) {
          printf("ERROR; return code from pthread_join is %d\n", rc);
          exit(-1);
          }
-      printf("Main: completed join with thread %ld having a status of %ld\n",t,(long)status);
+      printf("Main: completed join with thread %ld having a status of %ld\n",i,(long)status);
       }
  
 printf("Main: program completed. Exiting.\n");
