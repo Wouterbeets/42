@@ -11,7 +11,11 @@
 # **************************************************************************** #
 
 NAME		= philo
-FILES		= main.c 
+FILES		=\
+			main.c\
+			init_ph.c\
+			philo.c 
+
 SRCS		= $(addprefix srcs/, $(FILES))
 OBJS		= $(SRCS:ft_otool_dir/srcs/%.c=ft_otool_dir/.obj/%.o)
 INC			= -I includes -I libft/includes
