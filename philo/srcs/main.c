@@ -18,13 +18,22 @@ void		output_status(t_philo **ph)
 			sleep(1);
 			i = 0;
 		}
+//		pthread_mutex_lock(&wisemen[i]);
 		ft_putstr("philosopher num ");
 		ft_putnbr(ph[i]->num);
-		ft_putstr(" is ");
-		ft_putnbr(ph[i]->status);
-		ft_putstr("\n ");
+		ft_putstr(" life is ");
+		ft_putnbr(ph[i]->life);
+		ft_putstr("and he is ");
+		if (ph[i]->status == RESTING)
+		ft_putstr("resting");
+		if (ph[i]->status == EATING)
+		ft_putstr("eating");
+		if (ph[i]->status == THINKING)
+		ft_putstr("thinking");
 		if (ph[i]->status == DEAD)
 			break;
+//		pthread_mutex_unlock(&wisemen[i]);
+		ft_putstr("\n");
 		i++;
 	}
 }
@@ -76,23 +85,11 @@ int main ()
 	pthread_attr_init(&attr);
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 	ph = init_ph();
+	ft_putstr("creating_threads\n");
 	create_threads(ph, &attr, thread);
+	ft_putstr("done\n");
 	output_status(ph);
 	pthread_attr_destroy(&attr);
 	join_with_main(thread);
- 
-	printf("Main: program completed. Exiting.\n");
 	pthread_exit(NULL);
 }
-/*
- *	for(i=0; i<NUM_THREADS; i++)
-	{
-		rc = pthread_join(thread[i], &status);
-		if (rc)
-		{
-			 printf("ERROR; return code from pthread_join is %d\n", rc);
-			 exit(-1);
-		}
-		printf("Main: completed join with thread number %d\n", ((t_philo *)status)->status );
-    }
-*/

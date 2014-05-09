@@ -14,7 +14,8 @@ NAME		= philo
 FILES		=\
 			main.c\
 			init_ph.c\
-			philo.c 
+			philo.c\
+		   choose_action.c	
 
 SRCS		= $(addprefix srcs/, $(FILES))
 OBJS		= $(SRCS:ft_otool_dir/srcs/%.c=ft_otool_dir/.obj/%.o)

@@ -1,10 +1,10 @@
 
 #include <pthread.h>
 # define NUM_THREADS	7
-# define MAX_LIFE		10
+# define MAX_LIFE		100
 # define EAT_T			10	
-# define REST_T			12
-# define THINK_T		4
+# define REST_T			2
+# define THINK_T		3
 # define TIMEOUT		2000
 # define RESTING		0
 # define THINKING		1
@@ -28,3 +28,4 @@ pthread_mutex_t wisemen[NUM_THREADS];
 
 void		*philo(void *data);
 t_philo		**init_ph(void);
+void	choose_action(t_philo *ph);

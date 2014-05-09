@@ -3,7 +3,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-static void	fill_in_vals(t_philo **ph)
+static void		fill_in_vals(t_philo **ph)
 {
 	int		i;
 
