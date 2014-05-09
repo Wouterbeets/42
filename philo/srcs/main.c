@@ -9,7 +9,9 @@
 void		output_status(t_philo **ph)
 {
 	int		i;
+	int		time;
 
+	time = TIMEOUT;
 	i = 0;
 	while (42)
 	{
@@ -17,8 +19,10 @@ void		output_status(t_philo **ph)
 		{
 			sleep(1);
 			i = 0;
+			time--;
+			ft_putstr("\n");
 		}
-//		pthread_mutex_lock(&wisemen[i]);
+		pthread_mutex_lock(&wisemen);
 		ft_putstr("philosopher num ");
 		ft_putnbr(ph[i]->num);
 		ft_putstr(" life is ");
@@ -30,12 +34,13 @@ void		output_status(t_philo **ph)
 		ft_putstr("eating");
 		if (ph[i]->status == THINKING)
 		ft_putstr("thinking");
-		if (ph[i]->status == DEAD)
+		if (ph[i]->status == DEAD || time == 0)
 			break;
-//		pthread_mutex_unlock(&wisemen[i]);
+		pthread_mutex_unlock(&wisemen);
 		ft_putstr("\n");
 		i++;
 	}
+	ft_putstr("LETS DANCE");
 }
 
 void		create_threads(t_philo **ph, pthread_attr_t *attr, pthread_t *thread)
@@ -85,9 +90,7 @@ int main ()
 	pthread_attr_init(&attr);
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 	ph = init_ph();
-	ft_putstr("creating_threads\n");
 	create_threads(ph, &attr, thread);
-	ft_putstr("done\n");
 	output_status(ph);
 	pthread_attr_destroy(&attr);
 	join_with_main(thread);

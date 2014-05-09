@@ -17,10 +17,10 @@ static void		fill_in_vals(t_philo **ph)
 			ph[i]->left_ph = ph[NUM_THREADS - 1];
 		else 
 			ph[i]->left_ph = ph[i - 1];
-		if (i == NUM_THREADS)
+		if (i == NUM_THREADS - 1)
 			ph[i]->right_ph = ph[0];
 		else
-			ph[i]->right_ph = ph[i];
+			ph[i]->right_ph = ph[i + 1];
 		ph[i]->life = MAX_LIFE;
 		ph[i]->num = i;
 		i++;
@@ -34,10 +34,10 @@ t_philo		**init_ph(void)
 
 	ph = (t_philo **)malloc(NUM_THREADS * sizeof(t_philo *));
 	i = 0;
+	pthread_mutex_init(&wisemen, NULL);
 	while (i < NUM_THREADS)
 	{
 		ph[i] = (t_philo *)malloc(sizeof(t_philo));
-		pthread_mutex_init(&wisemen[i], NULL);
 		i++;
 	}
 	fill_in_vals(ph);

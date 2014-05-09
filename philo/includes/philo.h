@@ -1,11 +1,11 @@
 
 #include <pthread.h>
-# define NUM_THREADS	7
-# define MAX_LIFE		100
+# define NUM_THREADS	15
+# define MAX_LIFE		30
 # define EAT_T			10	
-# define REST_T			2
-# define THINK_T		3
-# define TIMEOUT		2000
+# define REST_T			6
+# define THINK_T		5
+# define TIMEOUT		120
 # define RESTING		0
 # define THINKING		1
 # define EATING			2
@@ -24,7 +24,7 @@ typedef struct		s_philo
 	struct s_philo	*right_ph;
 }					t_philo;
 
-pthread_mutex_t wisemen[NUM_THREADS];
+pthread_mutex_t wisemen;
 
 void		*philo(void *data);
 t_philo		**init_ph(void);

@@ -7,22 +7,22 @@
 static void		lose_life(t_philo *ph)
 {
 	sleep(1);
-	pthread_mutex_lock(&wisemen[ph->num]);
+	pthread_mutex_lock(&wisemen);
 	ph->life -= 1;
 	if (ph->life <= 0)
 	{
 		ph->status = DEAD;
 		pthread_exit((void *)ph);
 	}
-	pthread_mutex_unlock(&wisemen[ph->num]);
+	pthread_mutex_unlock(&wisemen);
 }
 
 static void		eating(t_philo *ph)
 {
 	sleep(EAT_T);
-	pthread_mutex_lock(&wisemen[ph->num]);
+	pthread_mutex_lock(&wisemen);
 	ph->life = MAX_LIFE;
-	pthread_mutex_unlock(&wisemen[ph->num]);
+	pthread_mutex_unlock(&wisemen);
 }
 
 static void		thinking(t_philo *ph)
