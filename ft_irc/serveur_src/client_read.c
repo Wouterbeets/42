@@ -6,7 +6,7 @@
 /*   By: wbeets <wbeets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 14:38:38 by wbeets            #+#    #+#             */
-/*   Updated: 2014/05/20 14:43:33 by wbeets           ###   ########.fr       */
+/*   Updated: 2014/05/21 20:03:54 by wbeets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,24 @@
 
 void	client_read(t_env *e, int cs)
 {
-  int	r;
-  int	i;
+	int	r;
+	int	i;
 
-  r = recv(cs, e->fds[cs].buf_read, BUF_SIZE, 0);
-  if (r <= 0)
-    {
-      close(cs);
-      clean_fd(&e->fds[cs]);
-      printf("client #%d gone away\n", cs);
-    }
-  else
-    {
-      i = 0;
-      while (i < e->maxfd)
+		i = 0;
+	r = recv(cs, e->fds[cs].buf_read, BUF_SIZE, 0);
+	if (r <= 0)
 	{
-	  if ((e->fds[i].type == FD_CLIENT) &&
-	      (i != cs))
-	    send(i, e->fds[cs].buf_read, r, 0);
-	  i++;
+		close(cs);
+		clean_fd(&e->fds[cs]);
+		printf("client #%d gone away\n", cs);
 	}
-    }
+	else
+	{
+		while (i <= r)
+		{
+			e->fds[cs].buf_write[i] = e->fds[cs].buf_read[i];
+			i++;
+		}
+		e->fds[cs].buf_write[i] = '\0';
+	}
 }

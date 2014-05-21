@@ -6,7 +6,7 @@
 #    By: wbeets <wbeets@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/04 16:27:25 by wbeets            #+#    #+#              #
-#    Updated: 2014/05/20 14:47:43 by wbeets           ###   ########.fr        #
+#    Updated: 2014/05/21 17:03:45 by wbeets           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FILES_SER	= main.c init_env.c clean_fd.c get_opt.c x.c main_loop.c \
 	init_fd.c do_select.c check_fd.c \
 	srv_create.c srv_accept.c \
 	client_read.c client_write.c
-FILES_CLI	= main.c ft_boo.c
+FILES_CLI	= main.c
 SRC_SER		= $(addprefix serveur_src/, $(FILES_SER))
 SRC_CLI		= $(addprefix client_src/, $(FILES_CLI))
 OBJ_SER		= $(SRC_SER:serveur_src/%.c=.serveur_obj/%.o)
@@ -77,7 +77,7 @@ fclean: clean
 gdb:
 	@mkdir -p .deb/
 	@cc -o $(DEB_SER) $(INCLUDE) $(DFLAGS) $(LIBCOM) $(SRC_SER)
-	@cc -o $(DEB_CLI) $(INCLUDE) $(DFLAGS) $(LIBCOM) $(SRC_SER)
+	@cc -o $(DEB_CLI) $(INCLUDE) $(DFLAGS) $(LIBCOM) $(SRC_CLI)
 
 lib:
 	@echo "\t---CHECKING LIBRARY---"

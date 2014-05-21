@@ -6,13 +6,12 @@
 /*   By: wbeets <wbeets@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 13:52:36 by wbeets            #+#    #+#             */
-/*   Updated: 2014/05/20 14:03:52 by wbeets           ###   ########.fr       */
+/*   Updated: 2014/05/21 16:57:12 by wbeets           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLIENT_H_
 # define CLIENT_H_
-
-void	ft_boo();
+# define BUF_SIZE 1024
 
 #endif /* !CLIENT_H_ */
