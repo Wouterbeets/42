@@ -6,15 +6,21 @@
 #    By: gpetrov <gpetrov@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/04/25 20:36:16 by gpetrov           #+#    #+#              #
-#    Updated: 2014/04/25 20:56:44 by gpetrov          ###   ########.fr        #
+#    Updated: 2014/05/30 23:54:37 by wbeets           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= 	lemipc
-FILES		= 	main.c
+FILES		= 	main.c\
+				connect_to_mem.c\
+				do_match.c\
+				place_rand.c\
+				error.c\
+				put_player.c\
+				init_map.c
 
 SRCS		= 	$(addprefix srcs/, $(FILES))
-OBJS		= 	$(SRCS:ft_otool_dir/srcs/%.c=ft_otool_dir/.obj/%.o)
+OBJS		= 	$(SRCS:srcs/%.c=.obj/%.o)
 INC			= 	-I includes -I libft/includes
 FLAGS		= 	-Wall -Wextra -Werror
 LIB			= 	-L libft -lft
